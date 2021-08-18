@@ -64,6 +64,10 @@ function updateBook(req, res, next) {
  * @param {NextFunction} next 
  */
 function deleteBook(req, res, next) {
+    const { id } = req.params;
+    const index = books.findIndex(book => book.id == id);
+    books.splice(index, 1);
+    res.status(200).json('Book was deleted');
 }
 
 module.exports = {

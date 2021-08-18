@@ -13,3 +13,6 @@ Content-Type: application/json
     "author": "Pär",
     "year": 1955
 }
+
+###
+DELETE http://localhost:3000/api/books/2
