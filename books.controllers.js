@@ -29,7 +29,12 @@ function getBooks(req, res, next) {
  * @param {NextFunction} next 
  */
 function getBook(req, res, next) {
-    
+    const { id } = req.params;
+    const book = books.find(book => book.id == id);
+    if (!book) {
+        return res.status(404).json(`No book with id ${id} was found.`);
+    }
+    res.status(200).json(book);
 }
 /**
  * 
