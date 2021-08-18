@@ -1,33 +1,19 @@
 const express = require('express');
+const { 
+    getBooks, 
+    getBook, 
+    createBook, 
+    updateBook, 
+    deleteBook 
+} = require('./books.controllers')
 const router = express.Router();
 
-const books = [{
-    id: 0,
-    title: 'tintin',
-    author: 'Dante',
-    year: 1990
-},
-{
-    id: 1,
-    title: 'lily',
-    author: 'Erik',
-    year: 1990
-}];
 
-router.get('/api/books', (req, res, next) => {
-    res.json(books);
-});
-router.get('/api/books/:id', (req, res, next) => {
-
-});
-router.post('/api/books', (req, res, next) => {
-    
-});
-router.put('/api/books/:id', (req, res, next) => {
-
-});
-router.delete('/api/books/:id', (req, res, next) => {
-
-});
+// Define endpoints
+router.get('/api/books', getBooks);
+router.get('/api/books/:id', getBook);
+router.post('/api/books', createBook);
+router.put('/api/books/:id', updateBook);
+router.delete('/api/books/:id', deleteBook);
 
 module.exports = router;
