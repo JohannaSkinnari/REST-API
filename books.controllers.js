@@ -43,6 +43,11 @@ function getBook(req, res, next) {
  * @param {NextFunction} next 
  */
 function createBook(req, res, next) {
+    if (req.body) {
+        books.push(req.body);
+        return res.status(201).json(req.body);
+    }
+    res.status(400).json('Missing body');
 }
 /**
  * 
