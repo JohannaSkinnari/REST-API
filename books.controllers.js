@@ -56,7 +56,6 @@ function createBook(req, res, next) {
     res.status(400).json('Missing body');
 }
 
-//TODO håller på med denna
 /**
  * 
  * @param {Request} req 
@@ -66,13 +65,11 @@ function createBook(req, res, next) {
 function updateBook(req, res, next) {
     const { id } = req.params;
     const newBook = req.body;
-
-    for (let i = 0; i < books.length; i++) {
-        let book = books[i]
-        if (book.id == id) {
-            book[i] = newBook;
-            return res.status(200).json('Book has been uppdated');
-        }
+    const book = books.find(book => book.id == id);
+    
+    if (book) {
+        Object.assign(book, newBook);
+        return res.status(200).json('Book has been uppdated');
     }
     res.status(404).json(`No book with id ${id} was found.`);
 }
