@@ -1,5 +1,6 @@
 const { Request, Response, NextFunction } = require('express');
 
+let indexId = 1;
 const books = [{
     id: 0,
     title: 'tintin',
@@ -22,6 +23,7 @@ const books = [{
 function getBooks(req, res, next) {
     res.json(books);
 }
+
 /**
  * 
  * @param {Request} req 
@@ -36,6 +38,8 @@ function getBook(req, res, next) {
     }
     res.status(200).json(book);
 }
+
+// TODO generera ett GUID??
 /**
  * 
  * @param {Request} req 
@@ -44,11 +48,15 @@ function getBook(req, res, next) {
  */
 function createBook(req, res, next) {
     if (req.body) {
-        books.push(req.body);
-        return res.status(201).json(req.body);
+        indexId ++;
+        const book = { id: indexId, ...req.body};
+        books.push(book);
+        return res.status(201).json(book);
     }
     res.status(400).json('Missing body');
 }
+
+//TODO håller på med denna
 /**
  * 
  * @param {Request} req 
@@ -56,7 +64,19 @@ function createBook(req, res, next) {
  * @param {NextFunction} next 
  */
 function updateBook(req, res, next) {
+    const { id } = req.params;
+    const newBook = req.body;
+
+    for (let i = 0; i < books.length; i++) {
+        let book = books[i]
+        if (book.id == id) {
+            book[i] = newBook;
+            return res.status(200).json('Book has been uppdated');
+        }
+    }
+    res.status(404).json(`No book with id ${id} was found.`);
 }
+
 /**
  * 
  * @param {Request} req 

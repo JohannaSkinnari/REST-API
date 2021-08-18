@@ -8,10 +8,20 @@ POST http://localhost:3000/api/books
 Content-Type: application/json
 
 {
-    "id": 2,
-    "title": "Pelle kanin",
+    "title": "Pelle kanin 2",
     "author": "Pär",
     "year": 1955
+}
+
+###
+PUT http://localhost:3000/api/books/1
+Content-Type: application/json
+
+{
+    "id": 1,
+    "title": "tom tom",
+    "author": "lolo",
+    "year": 2000
 }
 
 ###
