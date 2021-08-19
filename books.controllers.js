@@ -1,6 +1,6 @@
+const { v1: uuidv1} = require('uuid');
 const { Request, Response, NextFunction } = require('express');
 
-let indexId = 1;
 const books = [{
     id: 0,
     title: 'tintin',
@@ -39,7 +39,6 @@ function getBook(req, res, next) {
     res.status(200).json(book);
 }
 
-// TODO generera ett GUID??
 /**
  * 
  * @param {Request} req 
@@ -48,8 +47,7 @@ function getBook(req, res, next) {
  */
 function createBook(req, res, next) {
     if (req.body) {
-        indexId ++;
-        const book = { id: indexId, ...req.body};
+        const book = { id: uuidv1(), ...req.body };
         books.push(book);
         return res.status(201).json(book);
     }
