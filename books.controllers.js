@@ -78,15 +78,31 @@ function createBook(req, res, next) {
  * @param {NextFunction} next 
  */
 function updateBook(req, res, next) {
-    const { id } = req.params;
-    const newBook = req.body;
-    const book = books.find(book => book.id == id);
-    
-    if (book) {
-        Object.assign(book, newBook);
-        return res.status(200).json('Book has been uppdated');
+    if (req.body) {
+        const { id } = req.params;
+        const newBook = req.body;
+        fs.readFile('./dataDB.json', (err, data) => {
+            if (err) {
+                next(err);
+            }
+            let books = JSON.parse(data);
+            const book = books.find(book => book.id == id);
+            if (!book) {
+                return res.status(404).json(`No book with id ${id} was found.`);
+            }
+            Object.assign(book, newBook);
+            let jsonBooks = JSON.stringify(books);
+            fs.writeFile('dataDB.json', jsonBooks, (err) => {
+                if (err) {
+                    next(err);
+                }
+            });
+            res.status(200).json(book);
+        });
+    } 
+    else {
+        res.status(400).json('Missing body');
     }
-    res.status(404).json(`No book with id ${id} was found.`);
 }
 
 /**
