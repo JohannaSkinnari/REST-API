@@ -4,7 +4,7 @@ const fs = require('fs');
 
 
 
-// TODO om felhantering om det kommer in ett tomt objekt
+// TODO om felhantering om det kommer in ett tomt objekt. funkar ine heller om filen är tom
 /**
  * 
  * @param {Request} req 
@@ -29,11 +29,17 @@ function getBooks(req, res, next) {
  */
 function getBook(req, res, next) {
     const { id } = req.params;
-    const book = books.find(book => book.id == id);
-    if (!book) {
-        return res.status(404).json(`No book with id ${id} was found.`);
-    }
-    res.status(200).json(book);
+    fs.readFile('./dataDB.json', (err, data) => {
+        if (err) {
+            next(err);
+        }
+        let books = JSON.parse(data);
+        const book = books.find(book => book.id == id);
+        if (!book) {
+            return res.status(404).json(`No book with id ${id} was found.`);
+        }
+        res.status(200).json(book);
+    });
 }
 
 /**
@@ -44,11 +50,25 @@ function getBook(req, res, next) {
  */
 function createBook(req, res, next) {
     if (req.body) {
-        const book = { id: uuidv1(), ...req.body };
-        books.push(book);
-        return res.status(201).json(book);
+        fs.readFile('./dataDB.json', (err, data) => {
+            if (err) {
+                next(err);
+            }
+            books = JSON.parse(data);
+            book = { id: uuidv1(), ...req.body };
+            books.push(book);
+            let jsonBooks = JSON.stringify(books);
+            fs.writeFile('dataDB.json', jsonBooks, (err) => {
+                if (err) {
+                    next(err);
+                }
+            });
+            return res.status(201).json(book);
+        });
     }
-    res.status(400).json('Missing body');
+    else {
+        res.status(400).json('Missing body');
+    }
 }
 
 /**

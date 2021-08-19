@@ -1,14 +1,14 @@
 GET http://localhost:3000/api/books
 
 ###
-GET http://localhost:3000/api/books/1
+GET http://localhost:3000/api/books/0
 
 ###
 POST http://localhost:3000/api/books
 Content-Type: application/json
 
 {
-    "title": "Pelle kanin 2",
+    "title": "Pelle kanin 5",
     "author": "Pär",
     "year": 1955
 }
