@@ -113,9 +113,24 @@ function updateBook(req, res, next) {
  */
 function deleteBook(req, res, next) {
     const { id } = req.params;
-    const index = books.findIndex(book => book.id == id);
-    books.splice(index, 1);
-    res.status(200).json('Book was deleted');
+    fs.readFile('./dataDB.json', (err, data) => {
+        if (err) {
+            next(err);
+        }
+        let books = JSON.parse(data);
+        const index = books.findIndex(book => book.id == id);
+        if (index == -1) {
+            return res.status(404).json(`No book with id ${id} was found.`);
+        }
+        books.splice(index, 1);
+        let jsonBooks = JSON.stringify(books);
+        fs.writeFile('dataDB.json', jsonBooks, (err) => {
+            if (err) {
+                next(err);
+            }
+        });
+        res.status(200).json('Book was deleted');
+    });
 }
 
 module.exports = {
