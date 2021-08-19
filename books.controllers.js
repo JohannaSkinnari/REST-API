@@ -1,19 +1,10 @@
 const { v1: uuidv1} = require('uuid');
 const { Request, Response, NextFunction } = require('express');
+const fs = require('fs');
 
-const books = [{
-    id: 0,
-    title: 'tintin',
-    author: 'Dante',
-    year: 1990
-},
-{
-    id: 1,
-    title: 'lily',
-    author: 'Erik',
-    year: 1990
-}];
 
+
+// TODO om felhantering om det kommer in ett tomt objekt
 /**
  * 
  * @param {Request} req 
@@ -21,7 +12,13 @@ const books = [{
  * @param {NextFunction} next 
  */
 function getBooks(req, res, next) {
-    res.json(books);
+    fs.readFile('./dataDB.json', (err, data) => {
+        if (err) {
+            next(err);
+        }
+        let books = JSON.parse(data);
+        return res.status(200).json(books);
+    });
 }
 
 /**
