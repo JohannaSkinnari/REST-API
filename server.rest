@@ -19,10 +19,10 @@ Content-Type: application/json
 
 {
     "id": 1,
-    "title": "boken 2",
-    "author": "Johanna",
+    "title": "boken 3",
+    "author": "S",
     "year": 1984
 }
 
 ###
-DELETE http://localhost:3000/api/books/2
+DELETE http://localhost:3000/api/books/1

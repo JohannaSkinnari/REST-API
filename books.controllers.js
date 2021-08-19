@@ -12,7 +12,7 @@ const fs = require('fs');
  * @param {NextFunction} next 
  */
 function getBooks(req, res, next) {
-    fs.readFile('./dataDB.json', (err, data) => {
+    fs.readFile('./bookDB.json', (err, data) => {
         if (err) {
             next(err);
         }
@@ -29,7 +29,7 @@ function getBooks(req, res, next) {
  */
 function getBook(req, res, next) {
     const { id } = req.params;
-    fs.readFile('./dataDB.json', (err, data) => {
+    fs.readFile('./bookDB.json', (err, data) => {
         if (err) {
             next(err);
         }
@@ -50,7 +50,7 @@ function getBook(req, res, next) {
  */
 function createBook(req, res, next) {
     if (req.body) {
-        fs.readFile('./dataDB.json', (err, data) => {
+        fs.readFile('./bookDB.json', (err, data) => {
             if (err) {
                 next(err);
             }
@@ -58,7 +58,7 @@ function createBook(req, res, next) {
             book = { id: uuidv1(), ...req.body };
             books.push(book);
             let jsonBooks = JSON.stringify(books);
-            fs.writeFile('dataDB.json', jsonBooks, (err) => {
+            fs.writeFile('bookDB.json', jsonBooks, (err) => {
                 if (err) {
                     next(err);
                 }
@@ -81,7 +81,7 @@ function updateBook(req, res, next) {
     if (req.body) {
         const { id } = req.params;
         const newBook = req.body;
-        fs.readFile('./dataDB.json', (err, data) => {
+        fs.readFile('./bookDB.json', (err, data) => {
             if (err) {
                 next(err);
             }
@@ -92,7 +92,7 @@ function updateBook(req, res, next) {
             }
             Object.assign(book, newBook);
             let jsonBooks = JSON.stringify(books);
-            fs.writeFile('dataDB.json', jsonBooks, (err) => {
+            fs.writeFile('bookDB.json', jsonBooks, (err) => {
                 if (err) {
                     next(err);
                 }
@@ -113,7 +113,7 @@ function updateBook(req, res, next) {
  */
 function deleteBook(req, res, next) {
     const { id } = req.params;
-    fs.readFile('./dataDB.json', (err, data) => {
+    fs.readFile('./bookDB.json', (err, data) => {
         if (err) {
             next(err);
         }
@@ -124,7 +124,7 @@ function deleteBook(req, res, next) {
         }
         books.splice(index, 1);
         let jsonBooks = JSON.stringify(books);
-        fs.writeFile('dataDB.json', jsonBooks, (err) => {
+        fs.writeFile('bookDB.json', jsonBooks, (err) => {
             if (err) {
                 next(err);
             }
