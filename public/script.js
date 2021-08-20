@@ -10,12 +10,10 @@ function main() {
 async function laodBooks() {
     const response = await fetch('http://localhost:3000/api/books');
     const data = await response.json();
-    console.log(data);
     for (const book of data){
         books.push(book);
     }
-    console.log(books);
-    // return books;
+    return books;
 }
 
 // function renderBooks() {
