@@ -7,8 +7,7 @@ async function main() {
     addEventListeners();
     await loadBooks();
     renderBooks();
-    // await loadBook("34b26b00-018c-11ec-9d0f-2b955942d1c4");
-    // renderBook();
+    
 }
 
 async function loadBooks() {
@@ -27,7 +26,7 @@ function renderBooks() {
         const bookItem = document.createElement('div');
         bookItem.className = 'bookItem';
         const bookContent = 
-        `<h5>${book.title}</h5>
+        `<h3>${book.title}</h3>
         <div>Author: ${book.author}</div>
         <div>Year: ${book.year}</div>
         <button onclick="loadBook('${book.id}')">Details</button>`
@@ -51,11 +50,11 @@ function renderBook() {
     const bookItem = document.createElement('div');
     bookItem.className = 'bookItem';
     const bookContent = 
-    `<h5>${book.title}</h5>
+    `<h2>${book.title}</h2>
     <div>Author: ${book.author}</div>
     <div>Year: ${book.year}</div>
     <button>Back</button>
-    <button>Delete</button>
+    <button onclick="deleteBook('${book.id}')">Delete</button>
     <button onclick="renderEditForm(book)">Edit</button>`
     bookItem.innerHTML = bookContent;
     listContainer.append(bookItem);
@@ -107,7 +106,6 @@ function renderEditForm(book) {
 }
 
 function editBook(id) {
-    console.log('editbook function');
     const title = document.getElementById('editTitle').value;
     const author = document.getElementById('editAuthor').value;
     const year = document.getElementById('editYear').value;
@@ -118,5 +116,13 @@ function editBook(id) {
         method: 'PUT',
         headers: { "Content-Type": "application/json" },
         body: data
+    });
+}
+
+function deleteBook(id) {
+    console.log('delete function');
+    console.log(id);
+    fetch('http://localhost:3000/api/books/' + id, {
+        method: 'DELETE'
     });
 }
