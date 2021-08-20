@@ -8,21 +8,21 @@ POST http://localhost:3000/api/books
 Content-Type: application/json
 
 {
-    "title": "Pelle kanin 2",
-    "author": "Pär",
-    "year": 1980
+    "title": "Nineteen Eighty-Four",
+    "author": "George Orwel",
+    "year": 1949
 }
 
 ###
-PUT http://localhost:3000/api/books/1
+PUT http://localhost:3000/api/books/340fe970-018c-11ec-9013-6909dce13355
 Content-Type: application/json
 
 {
     "id": 1,
-    "title": "boken 3",
-    "author": "S",
-    "year": 1984
+    "title": "Outlander",
+    "author": "Diana Gabaldon",
+    "year": 1991
 }
 
 ###
-DELETE http://localhost:3000/api/books/1
+DELETE http://localhost:3000/api/books/34b26b00-018c-11ec-9d0f-2b955942d1c4
