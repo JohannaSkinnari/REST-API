@@ -30,7 +30,7 @@ function renderBooks() {
         `<h5>${book.title}</h5>
         <div>Author: ${book.author}</div>
         <div>Year: ${book.year}</div>
-        <button>Details</button>
+        <button onclick="loadBook('${book.id}')">Details</button>
         <button>Delete</button>
         <button>Edit</button>`
         bookItem.innerHTML = bookContent;
@@ -43,7 +43,8 @@ async function loadBook(id) {
     const response = await fetch('http://localhost:3000/api/books/' + id);
     book = await response.json();
 
-    return book;
+    // return book;
+    renderBook();
 }
 
 function renderBook() {
@@ -79,3 +80,7 @@ function createBook() {
         body: data
     })
 }
+
+// function editBook() {
+    
+// }
