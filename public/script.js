@@ -56,7 +56,7 @@ function renderBook() {
     <div>Year: ${book.year}</div>
     <button>Back</button>
     <button>Delete</button>
-    <button>Edit</button>`
+    <button onclick="renderEditForm(book)">Edit</button>`
     bookItem.innerHTML = bookContent;
     listContainer.append(bookItem);
 }
@@ -79,6 +79,44 @@ function createBook() {
     })
 }
 
-// function editBook() {
-    
-// }
+function renderEditForm(book) {
+    const editFormContainer = document.querySelector('.editFormContainer');
+    editFormContainer.innerHTML = "";
+
+    const editForm = document.createElement('div');
+    const editFormContent = `
+    <form>
+            <h2>Edit ${book.title}</h2>
+            <div>
+                <label for="editTitle">Title</label>
+                <input type="text" name="editTitle" id="editTitle" placeholder="${book.title}" value="${book.title} ">
+            </div>
+            <div>
+                <label for="editAuthor">Author</label>
+                <input type="text" name="editAuthor" id="editAuthor" placeholder="${book.author}" value="${book.author} " ">
+            </div>
+            <div>
+                <label for="editYear">Year</label>
+                <input type="text" name="editYear" id="editYear" placeholder="${book.year}" value="${book.year}">
+            </div>
+            <button onclick="editBook('${book.id}')">Save</button>
+        </form>
+    `
+    editForm.innerHTML = editFormContent;
+    editFormContainer.append(editForm);
+}
+
+function editBook(id) {
+    console.log('editbook function');
+    const title = document.getElementById('editTitle').value;
+    const author = document.getElementById('editAuthor').value;
+    const year = document.getElementById('editYear').value;
+    const newBook = { id, title, author, year };
+    const data = JSON.stringify(newBook)
+    console.log(data);
+    fetch('http://localhost:3000/api/books/' + id, {
+        method: 'PUT',
+        headers: { "Content-Type": "application/json" },
+        body: data
+    });
+}
