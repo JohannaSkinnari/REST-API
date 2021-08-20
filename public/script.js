@@ -30,9 +30,7 @@ function renderBooks() {
         `<h5>${book.title}</h5>
         <div>Author: ${book.author}</div>
         <div>Year: ${book.year}</div>
-        <button onclick="loadBook('${book.id}')">Details</button>
-        <button>Delete</button>
-        <button>Edit</button>`
+        <button onclick="loadBook('${book.id}')">Details</button>`
         bookItem.innerHTML = bookContent;
         listContainer.append(bookItem);
     });
