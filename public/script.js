@@ -4,10 +4,11 @@ let books = [];
 let book = {};
 
 async function main() {
-    // await loadBooks();
-    // renderBooks();
-    await loadBook("34b26b00-018c-11ec-9d0f-2b955942d1c4");
-    renderBook();
+    addEventListeners();
+    await loadBooks();
+    renderBooks();
+    // await loadBook("34b26b00-018c-11ec-9d0f-2b955942d1c4");
+    // renderBook();
 }
 
 async function loadBooks() {
@@ -59,4 +60,22 @@ function renderBook() {
     <button>Edit</button>`
     bookItem.innerHTML = bookContent;
     listContainer.append(bookItem);
+}
+
+function addEventListeners() {
+    const createButton = document.querySelector('.createButton');
+    createButton.addEventListener('click', () => createBook());
+}
+
+function createBook() {
+    const title = document.getElementById('title').value;
+    const author = document.getElementById('author').value;
+    const year = document.getElementById('year').value;
+    const newBook = { title, author, year };
+    const data = JSON.stringify(newBook)
+    fetch('http://localhost:3000/api/books', {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: data
+    })
 }
