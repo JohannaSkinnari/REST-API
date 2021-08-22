@@ -1,0 +1,104 @@
+:root {
+    --header-height: 5rem;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, 
+body {
+    max-width: 100%;
+    min-height: 100%;
+    color: cornsilk;
+    background-color: black;
+    background-image: url(../img/background.jpg);
+    background-size: cover;
+}
+
+header {
+    height: var(--header-height);
+    text-align: center;
+    padding-top: 0.5rem;
+    font-family: 'Viaoda Libre', cursive;
+    background-color: black;
+}
+
+header > h1 {
+    margin: auto;
+    font-size: 4rem;
+    font-weight: 800;
+}
+
+main {
+    min-height: calc(100vh - (var(--header-height)));
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+}
+
+h2 {
+    font-family: 'Viaoda Libre', cursive;
+    font-weight: 700;
+}
+
+h3 {
+    font-weight: 600;
+}
+
+.formDiv {
+    width: 20rem;
+    margin: auto;
+    font-size: large;
+    background-color: black;
+}
+
+.editFormDiv {
+    width: 23rem;
+    font-size: large;
+    background-color: cadetblue;
+    color: black;
+}
+
+.contentContainer {
+    width: 25rem;
+    background-color: black;
+}
+
+.bookItem {
+    width: 23rem;
+    font-size: large;
+    border: 2px solid black;
+    background-color: cadetblue;
+    color: black;
+}
+
+.btn-delete {
+    background-color: rgb(214, 81, 103);
+}
+
+.btn-edit {
+    background-color: rgb(219, 218, 166);
+}
+
+.btn-save {
+    background-color: rgb(117, 200, 211);
+}
+
+.btn {
+    border: 1px solid black;
+}
+
+@media (max-width: 768px) {
+    .contentContainer {
+        width: 20rem;
+    }
+    
+    .bookItem {
+        width: 18rem;
+    }
+
+    .editFormDiv {
+        width: 18rem;
+    }
+}

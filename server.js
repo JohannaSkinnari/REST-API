@@ -1,7 +1,9 @@
 const express = require('express');
+const cors = require('cors');
 const booksRouter = require('./books.router');
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 
 // Add Resources
