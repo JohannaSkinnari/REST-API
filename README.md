@@ -22,3 +22,6 @@ Alla.
 Starta klientsidan med Live Server.
 Starta servern med komandot *npm start* i teminalen.
 Kan välja att testa endpointsen genom webbsidan eller via server.rest.
+
+## Github länk
+https://github.com/JohannaSkinnari/REST-API
