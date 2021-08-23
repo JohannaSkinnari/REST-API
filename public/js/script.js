@@ -7,7 +7,11 @@ async function main() {
     addEventListeners();
     await loadBooks();
     renderBooks();
-    
+}
+
+function addEventListeners() {
+    const createButton = document.querySelector('.createButton');
+    createButton.addEventListener('click', () => createBook());
 }
 
 async function loadBooks() {
@@ -42,7 +46,6 @@ function renderBooks() {
     });
 }
 
-
 async function loadBook(id) {
     const response = await fetch('http://localhost:3000/api/books/' + id);
     book = await response.json();
@@ -71,11 +74,6 @@ function renderBook() {
     <button class="btn btn-edit" onclick="renderEditForm(book)">Edit</button>`
     bookItem.innerHTML = bookContent;
     bookContainer.append(bookItem);
-}
-
-function addEventListeners() {
-    const createButton = document.querySelector('.createButton');
-    createButton.addEventListener('click', () => createBook());
 }
 
 function createBook() {
