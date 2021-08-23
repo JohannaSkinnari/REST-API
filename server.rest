@@ -18,7 +18,7 @@ PUT http://localhost:3000/api/books/340fe970-018c-11ec-9013-6909dce13355
 Content-Type: application/json
 
 {
-    "id": 1,
+    "id": "340fe970-018c-11ec-9013-6909dce13355",
     "title": "Outlander",
     "author": "Diana Gabaldon",
     "year": 1991

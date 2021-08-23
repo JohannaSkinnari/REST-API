@@ -2,9 +2,6 @@ const { v1: uuidv1} = require('uuid');
 const { Request, Response, NextFunction } = require('express');
 const fs = require('fs');
 
-
-
-// TODO om felhantering om det kommer in ett tomt objekt. funkar ine heller om filen är tom
 /**
  * 
  * @param {Request} req 
